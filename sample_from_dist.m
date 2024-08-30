@@ -41,11 +41,23 @@ DataNew_pdf = N1 / n; % such that the total count is equivalent to P = 1
 DKL_step = @(p, q) p * log(p/q);
 DKL_0 = 0;
 for i = 1:bins
-    DKL_0 = DKL_0 + DKL_step(Data0_pdf(i), DataNew_pdf(i));
+    step = DKL_step(Data0_pdf(i), DataNew_pdf(i));
+    if isfinite(step) && ~isnan(step)
+        DKL_0 = DKL_0 + step;
+    else
+        % if p or q are zero, output step but do not add it
+        step
+    end
 end
 DKL_New = 0;
 for i = 1:bins
-    DKL_New = DKL_New + DKL_step(DataNew_pdf(i), Data0_pdf(i));
+    step = DKL_step(DataNew_pdf(i), Data0_pdf(i));
+    if isfinite(step) && ~isnan(step)
+        DKL_New = DKL_New + step;
+    else
+        % if p or q are zero, output step but do not add it
+        step
+    end
 end
 
 % Visualisation
