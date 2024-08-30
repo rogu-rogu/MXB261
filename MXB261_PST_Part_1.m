@@ -1,4 +1,5 @@
 %% ----------- MXB261 Problem Solving Task: Part 1 -----------------------]
+% Kassia Lembryk-Walsh (n11090677)
 % Referencing falling and accreting particles, rather than a crowd of
 % people, because that doesn't make sense :3
 

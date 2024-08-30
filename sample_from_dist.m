@@ -3,6 +3,8 @@ function f = sample_from_dist(Data0, bins, seed)
 % creates DataNew by sampling from the pdf, and generates binned data for
 % the pdf of DataNew.
 
+%% Determining pdf and generating samples
+
 % i) ----------------------------------------------------------------]
 n = length(Data0); 
 [N0, edges0] = histcounts(Data0, bins); 
@@ -37,6 +39,8 @@ end
 [N1, edges1] = histcounts(DataNew, bins);
 DataNew_pdf = N1 / n; % such that the total count is equivalent to P = 1
 
+%% Kullback-Leibler measure
+
 % iv) --------------------------------------------------------------------]
 DKL_step = @(p, q) p * log(p/q);
 DKL_0 = 0;
@@ -60,7 +64,8 @@ for i = 1:bins
     end
 end
 
-% Visualisation
+%% Visualising histograms
+
 f = figure;
 subplot(1,2, 1), histogram('BinCounts', Data0_pdf, 'BinEdges', edges0)
 ylabel('P(X=x)'), xlabel('x'), title('Data0 pdf')
